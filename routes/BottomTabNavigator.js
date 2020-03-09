@@ -53,7 +53,7 @@ const BottomTabNavigator = createBottomTabNavigator(
     animationEnabled: true,
     tabBarOptions: {
       showLabel: false,
-      activeTintColor: '#e91e63',
+      activeTintColor: 'red',
       inactiveTintColor: '#888',
       activeBackgroundColor: 'black', // iOS
       inactiveBackgroundColor: 'black', // iOS
