@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Card from '../shared/Card';
 import { ScrollView } from 'react-native-gesture-handler';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function Home({ navigation }) {
   const [movies, setMovies] = useState([
@@ -16,24 +17,40 @@ export default function Home({ navigation }) {
       title: 'Avengers: Infinity War',
       imageUrl:
         'https://upload.wikimedia.org/wikipedia/en/4/4d/Avengers_Infinity_War_poster.jpg',
+      bgImageUrl:
+        'https://www.nme.com/wp-content/uploads/2018/04/Screen_Shot_2018_04_24_at_6-696x442.png',
       rating: 8,
-      body: 'lorem ipsum',
+      genre: 'Fantasy,Action',
+      duration: '2h15m',
+      description:
+        'Lorem ipsum dolor sit ame. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui. Lacus sed turpis tincidunt id aliquet risus feugiat in ante. Odio facilisis mauris sit amet. odo sed egestas egestas. Penatibus et magnis dis parturient montes.',
       key: '1'
     },
     {
       title: 'Dunkirk',
       imageUrl:
         'https://images-na.ssl-images-amazon.com/images/I/61jphewUR6L._AC_SL1111_.jpg',
+      bgImageUrl: 'https://wallpaperaccess.com/full/1301014.jpg',
       rating: 8,
-      body: 'lorem ipsum',
+      genre: 'Fantasy,Action',
+      duration: '2h15m',
+      description:
+        'Lorem ipsum dolor sit ame. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui. Lacus sed turpis tincidunt id aliquet risus feugiat in ante. Odio facilisis mauris sit amet. odo sed egestas egestas. Penatibus et magnis dis parturient montes.',
       key: '2'
     },
     {
       title: 'Logan',
       imageUrl:
         'https://upload.wikimedia.org/wikipedia/en/3/37/Logan_2017_poster.jpg',
+      bgImageUrl:
+        'https://images-na.ssl-images-amazon.com/images/S/sgp-catalog-images/region_US/fox-031859-Full-Image_GalleryBackground-en-US-1494632286397._SX1080_.jpg',
+
       rating: 9,
-      body: 'lorem ipsum',
+      genre: 'Fantasy,Action',
+      duration: '2h15m',
+      description:
+        'Lorem ipsum dolor sit ame. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui. Lacus sed turpis tincidunt id aliquet risus feugiat in ante. Odio facilisis mauris sit amet. odo sed egestas egestas. Penatibus et magnis dis parturient montes.',
+
       key: '3'
     }
   ]);
@@ -73,50 +90,66 @@ export default function Home({ navigation }) {
     }
   ];
   return (
-    <View style={styles.component}>
-      <ScrollView>
-        <View>
-          <Text>Recently Added</Text>
-          <FlatList
-            horizontal
-            data={movies}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('MovieDetails', item)}>
-                <Card>
-                  <Image
-                    style={{ width: 140, height: 220, borderRadius: 4 }}
-                    source={{ uri: item.imageUrl }}
-                  />
-                  <Text small bold numberOfLines={1} style={styles.titleText}>
-                    {item.title}
-                  </Text>
-                </Card>
-              </TouchableOpacity>
-            )}
+    <ScrollView style={styles.component}>
+      <View>
+        <View style={styles.listTitleView}>
+          <Text style={styles.listTitle}>Recently Added</Text>
+          <AntDesign
+            style={styles.listIcon}
+            name="right"
+            color="white"
+            size={24}
           />
         </View>
-        <View>
-          <Text>Trending Series</Text>
-          <FlatList
-            horizontal
-            data={trendingTvSeries}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('MovieDetails', item)}>
-                <Card>
-                  <Image
-                    style={{ width: 140, height: 220, borderRadius: 4 }}
-                    source={{ uri: item.imageUrl }}
-                  />
-                  <Text style={styles.titleText}>{item.title}</Text>
-                </Card>
-              </TouchableOpacity>
-            )}
+        <FlatList
+          horizontal
+          data={movies}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('MovieDetails', item)}>
+              <Card>
+                <Image
+                  style={{ width: 140, height: 220, borderRadius: 4 }}
+                  source={{ uri: item.imageUrl }}
+                />
+                <Text small bold numberOfLines={1} style={styles.titleText}>
+                  {item.title}
+                </Text>
+              </Card>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+      <View>
+        <View style={styles.listTitleView}>
+          <Text style={styles.listTitle}>Trending Series</Text>
+          <AntDesign
+            style={styles.listIcon}
+            name="right"
+            color="white"
+            size={24}
           />
         </View>
-      </ScrollView>
-    </View>
+        <FlatList
+          horizontal
+          data={trendingTvSeries}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('MovieDetails', item)}>
+              <Card>
+                <Image
+                  style={{ width: 140, height: 220, borderRadius: 4 }}
+                  source={{ uri: item.imageUrl }}
+                />
+                <Text small bold numberOfLines={1} style={styles.titleText}>
+                  {item.title}
+                </Text>
+              </Card>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    </ScrollView>
   );
 }
 
@@ -126,5 +159,22 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: 'white'
+  },
+  listTitle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  listTitleView: {
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    shadowOffset: { width: 1, height: 1 },
+    shadowColor: '#333',
+    shadowOpacity: 0.3,
+    shadowRadius: 2
+  },
+  listIcon: {
+    alignSelf: 'flex-end'
   }
 });

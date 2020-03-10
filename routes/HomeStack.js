@@ -9,7 +9,10 @@ const screens = {
     screen: Home
   },
   MovieDetails: {
-    screen: MovieDetails
+    screen: MovieDetails,
+    navigationOptions: {
+      headerShown: false
+    }
   }
 };
 
