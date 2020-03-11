@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import Card from '../shared/Card';
+import Title from '../shared/Title';
+import CardList from '../shared/CardList';
+
 import { ScrollView } from 'react-native-gesture-handler';
-import { AntDesign } from '@expo/vector-icons';
 
 export default function Home({ navigation }) {
   const [movies, setMovies] = useState([
@@ -89,65 +90,16 @@ export default function Home({ navigation }) {
       key: '4'
     }
   ];
+
   return (
     <ScrollView style={styles.component}>
       <View>
-        <View style={styles.listTitleView}>
-          <Text style={styles.listTitle}>Recently Added</Text>
-          <AntDesign
-            style={styles.listIcon}
-            name="right"
-            color="white"
-            size={24}
-          />
-        </View>
-        <FlatList
-          horizontal
-          data={movies}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('MovieDetails', item)}>
-              <Card>
-                <Image
-                  style={{ width: 140, height: 220, borderRadius: 4 }}
-                  source={{ uri: item.imageUrl }}
-                />
-                <Text small bold numberOfLines={1} style={styles.titleText}>
-                  {item.title}
-                </Text>
-              </Card>
-            </TouchableOpacity>
-          )}
-        />
+        <Title title={'Recently Added'} iconName={'ios-arrow-forward'} />
+        <CardList data={movies} navigation={navigation} />
       </View>
       <View>
-        <View style={styles.listTitleView}>
-          <Text style={styles.listTitle}>Trending Series</Text>
-          <AntDesign
-            style={styles.listIcon}
-            name="right"
-            color="white"
-            size={24}
-          />
-        </View>
-        <FlatList
-          horizontal
-          data={trendingTvSeries}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('MovieDetails', item)}>
-              <Card>
-                <Image
-                  style={{ width: 140, height: 220, borderRadius: 4 }}
-                  source={{ uri: item.imageUrl }}
-                />
-                <Text small bold numberOfLines={1} style={styles.titleText}>
-                  {item.title}
-                </Text>
-              </Card>
-            </TouchableOpacity>
-          )}
-        />
+        <Title title={'Trending Series'} iconName={'ios-arrow-forward'} />
+        <CardList data={trendingTvSeries} navigation={navigation} />
       </View>
     </ScrollView>
   );
@@ -155,26 +107,7 @@ export default function Home({ navigation }) {
 
 const styles = StyleSheet.create({
   component: {
+    padding: 5,
     backgroundColor: '#0B0A0A'
-  },
-  titleText: {
-    color: 'white'
-  },
-  listTitle: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 20
-  },
-  listTitleView: {
-    padding: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#333',
-    shadowOpacity: 0.3,
-    shadowRadius: 2
-  },
-  listIcon: {
-    alignSelf: 'flex-end'
   }
 });

@@ -10,75 +10,71 @@ import {
 } from 'react-native';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 const windowHeight = Dimensions.get('window').height;
+import Title from '../shared/Title';
 
 export default function MovieDetails({ navigation }) {
   const pressHandler = () => {
     navigation.goBack();
   };
   return (
-    <ScrollView style={styles.container}>
-      <ImageBackground
-        source={{
-          uri: navigation.getParam('bgImageUrl')
-        }}
-        style={styles.imgBack}>
-        <View style={styles.imgBackView}>
-          <Ionicons
-            name="ios-arrow-round-back"
-            size={50}
-            style={styles.goBackIcon}
-            onPress={pressHandler}
-          />
-          <View>
-            <Image
-              style={styles.imgMovie}
-              source={{ uri: navigation.getParam('imageUrl') }}
+    <ScrollView>
+      <View style={styles.container}>
+        <ImageBackground
+          source={{
+            uri: navigation.getParam('bgImageUrl')
+          }}
+          style={styles.imgBack}>
+          <View style={styles.imgBackView}>
+            <Ionicons
+              name="ios-arrow-round-back"
+              size={50}
+              style={styles.goBackIcon}
+              onPress={pressHandler}
             />
-            <View style={styles.bottomPart}>
-              <Text style={styles.titleMovie}>
-                {navigation.getParam('title')}
-              </Text>
-              <View style={styles.infoPart}>
-                <Text style={styles.infoText}>
-                  {navigation.getParam('genre')}
+            <View>
+              <Image
+                style={styles.imgMovie}
+                source={{ uri: navigation.getParam('imageUrl') }}
+              />
+              <View style={styles.bottomPart}>
+                <Text style={styles.titleMovie}>
+                  {navigation.getParam('title')}
                 </Text>
-                <Text style={styles.infoText}>
-                  {navigation.getParam('duration')}
-                </Text>
-                <View style={styles.ratingInfo}>
-                  <Ionicons name="ios-star" color="#BFA142" size={16} />
-                  <Text style={styles.ratingText}>
-                    {' '}
-                    {navigation.getParam('rating')}
+                <View style={styles.infoPart}>
+                  <Text style={styles.infoText}>
+                    {navigation.getParam('genre')}
                   </Text>
+                  <Text style={styles.infoText}>
+                    {navigation.getParam('duration')}
+                  </Text>
+                  <View style={styles.ratingInfo}>
+                    <Ionicons name="ios-star" color="#BFA142" size={16} />
+                    <Text style={styles.ratingText}>
+                      {' '}
+                      {navigation.getParam('rating')}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-      </ImageBackground>
-      <View style={styles.area}>
-        <View>
-          <View style={styles.listTitleView}>
-            <Text style={styles.listTitle}>Recently Added</Text>
-            <AntDesign
-              style={styles.listIcon}
-              name="right"
-              color="white"
-              size={24}
-            />
+        </ImageBackground>
+        <View style={styles.area}>
+          <Title title={'Movie Info'} iconName={'ios-arrow-down'} />
+          <View style={styles.infoTextView}>
+            <Text style={styles.infoText}>
+              {navigation.getParam('description')}
+            </Text>
           </View>
         </View>
-        <Text style={styles.infoText}>
-          {navigation.getParam('description')}
-        </Text>
       </View>
     </ScrollView>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    height: windowHeight
   },
 
   imgBack: {
@@ -107,8 +103,7 @@ const styles = StyleSheet.create({
   area: {
     backgroundColor: 'black',
     height: '100%',
-    alignSelf: 'auto',
-    padding: 15
+    alignSelf: 'auto'
   },
   titleMovie: {
     color: 'white',
@@ -122,6 +117,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
+  infoTextView: {
+    padding: 15
+  },
   infoText: {
     color: 'gray'
   },
@@ -132,22 +130,5 @@ const styles = StyleSheet.create({
   ratingText: {
     color: 'gray',
     justifyContent: 'flex-end'
-  },
-  listTitle: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 20
-  },
-  listTitleView: {
-    paddingVertical: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#333',
-    shadowOpacity: 0.3,
-    shadowRadius: 2
-  },
-  listIcon: {
-    alignSelf: 'flex-end'
   }
 });
