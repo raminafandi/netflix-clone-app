@@ -10,7 +10,7 @@ export default function Card(props) {
         style={styles.listIcon2}
         name={props.iconName}
         color="white"
-        size={24}
+        size={25}
       />
     </View>
   );
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   listTitleView: {
-    borderWidth: 2,
+    borderBottomWidth: 2,
     borderColor: 'black',
     borderRadius: 4,
     padding: 16,
@@ -35,8 +35,5 @@ const styles = StyleSheet.create({
   },
   listIcon2: {
     alignSelf: 'flex-end'
-  },
-  listIcon1: {
-    alignSelf: 'flex-start'
   }
 });
